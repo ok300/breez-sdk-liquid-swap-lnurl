@@ -1,0 +1,15 @@
+[package]
+name = "breez-sdk-liquid-ln-address"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+breez-sdk-liquid = { path = "../breez-sdk-liquid/lib" }
+chrono = "0.4"
+env_logger = "0.11"
+figment = { version = "0.10.12", features = ["toml"] }
+log = "0"
+qrcode-rs = { version = "0.1", default-features = false }
+rocket = { version = "0.5.0", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
