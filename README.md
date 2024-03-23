@@ -13,20 +13,11 @@ Setup `breez-sdk-liquid`:
 ```bash
 # Clone specific branch
 git clone -b ok300-consolidate-rev-swap-onchain-amt --single-branch https://github.com/breez/breez-sdk-liquid
-
-# Create a new wallet
-cd breez-sdk-liquid/cli
-cargo run
-# Exit with Ctrl+C
-
-# Print the generated mnemonic, copy it for later
-cat .data/phrase ; echo
 ```
 
 Next to `breez-sdk-liquid`, setup this repo:
 
 ```bash
-cd ../..
 git clone https://github.com/ok300/breez-sdk-liquid-swap-lnurl
 cd breez-sdk-liquid-swap-lnurl
 ```
@@ -48,10 +39,12 @@ max_sendable_msat = 25_000_000_000
 
 Set `domain` to the public domain under which this instance is running.
 
-Set `mnemonic` to the mnemonic copied earlier from the CLI.
+Set `mnemonic` to a 12 or 24 word mnemonic.
 
 Start it:
 
 ```bash
-ROCKET_PORT=443 cargo run
+cargo run
 ```
+
+and use a reverse proxy to map the local port 8000 to the public port 443.
