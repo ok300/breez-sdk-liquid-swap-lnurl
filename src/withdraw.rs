@@ -1,8 +1,8 @@
 use std::sync::Arc;
 use std::time::SystemTime;
 
-use rocket::{get, State};
 use rocket::serde::json::{serde_json::json, Value};
+use rocket::{get, State};
 
 use crate::*;
 
@@ -76,8 +76,11 @@ pub(crate) async fn withdraw_pay_invoice(
     };
 
     // TODO Check k1
+    let prepare_response = ls_sdk
+        .prepare_payment(&pr)
+        .map_err(|err| build_lnurl_response_err(&format!("Failed to prepare payment: {err}")))?;
     ls_sdk
-        .send_payment(&pr)
+        .send_payment(&prepare_response)
         .map(|res| json!({"txid": res.txid }))
         .map_err(|err| build_lnurl_response_err(&format!("Failed to pay invoice: {err}")))
 }
